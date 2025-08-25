@@ -8,10 +8,50 @@ class BasePage:
         self._page = page
 
     def add_text(self, locator, text):
+        element = self._page.locator(locator)
+        element.evaluate(f"""
+               (el) => {{
+                   const origShadow = el.style.boxShadow;
+                   const origBackground = el.style.backgroundColor;
+                   el.style.border = '3px solid red'; 
+                   el.style.boxShadow = '0 0 10px 4px rgba(0, 150, 255, 0.7)';
+                   el.style.backgroundColor = '#eeebd0';
+
+                   setTimeout(() => {{
+                       el.style.boxShadow = origShadow;
+                       el.style.backgroundColor = origBackground;
+                   }}, 300);
+               }}
+           """)
         self._page.locator(locator).fill(text)
 
     def click(self, my_locator):
-        time.sleep(1)
+        time.sleep(0.5)
+        script = f"""
+                () => {{
+                    document.addEventListener("mousedown", (e) => {{
+                      const ripple = document.createElement("div");
+                      ripple.style.position = "fixed";
+                      ripple.style.left = e.clientX + "px";
+                      ripple.style.top = e.clientY + "px";
+                      ripple.style.width = "30px";
+                      ripple.style.height = "30px";
+                      ripple.style.border = "2px solid red";
+                      ripple.style.borderRadius = "50%";
+                      ripple.style.pointerEvents = "none";
+                      ripple.style.transform = "translate(-50%, -50%) scale(0)";
+                      ripple.style.opacity = "0.8";
+                      ripple.style.transition = "transform 0.2s ease-out, opacity 0.3s ease-out";
+                      document.body.appendChild(ripple);
+                      requestAnimationFrame(() => {{
+                        ripple.style.transform = "translate(-50%, -50%) scale(2.5)";
+                        ripple.style.opacity = "0";
+                      }});
+                      setTimeout(() => ripple.remove(), 700);
+                    }});
+                }}
+                """
+        self._page.evaluate(script)
         self._page.locator(my_locator).click()
 
     def click_first(self, my_first_locator):
