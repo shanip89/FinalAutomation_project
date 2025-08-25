@@ -9,14 +9,16 @@ from tests.base_test import BaseTest
 from utils.config_reader import ConfigReader
 
 
+@allure.epic("Security")
+@allure.feature("Login")
 @pytest.mark.usefixtures("fresh_function")
 class TestLogin(BaseTest):  # This is the TEST CLASS
 
     @allure.severity(Severity.BLOCKER)
-    @allure.epic("Security")
-    @allure.feature("Login")
     @allure.description("Verify that a user can log in with valid credentials")
     @allure.title("Successful login test")
+    @allure.story("As a user I want to login after entering a valid credentials")
+    @pytest.mark.order(1)
     def test_user_login(self):  # This is a TEST METHOD
         # Use the credentials stored in the fixture
         with allure.step("login step with the valid credentials"):
@@ -28,6 +30,7 @@ class TestLogin(BaseTest):  # This is the TEST CLASS
 
     @allure.description("Verify that login fails with an incorrect password")
     @allure.title("Invalid password test")
+    @allure.story("As a user I want to get error messages after entering invalid credentials")
     @pytest.mark.parametrize("password", TestData.users)
     def test_user_wrong_info(self, password):
         with allure.step("login with incorrect password"):

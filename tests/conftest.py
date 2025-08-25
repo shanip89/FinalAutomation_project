@@ -31,6 +31,7 @@ def setup_page_class(request, browser):
     page = browser.new_page()
     url1 = ConfigReader.read_config("general", "url")
     page.goto(url1)
+    request.cls.page = page
     request.cls.login_page = LoginPage(page)
     request.cls.forgot_page = ForgotPasswordPage(page)
     request.cls.change_page = ChangeCurrencyPage(page)
@@ -51,6 +52,7 @@ def setup_page_class(request, browser):
 def fresh_function(request, page: Page):
     url1 = ConfigReader.read_config("general", "url")
     page.goto(url1)
+    request.cls.page = page
     request.cls.login_page = LoginPage(page)
     request.cls.forgot_page = ForgotPasswordPage(page)
     request.cls.change_page = ChangeCurrencyPage(page)
@@ -65,5 +67,30 @@ def fresh_function(request, page: Page):
     request.cls.form_page = FormPage(page)
     request.cls.address_page = AddressPage(page)
     request.cls.logout_page = LogoutPage(page)
+
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    result = outcome.get_result()
+
+    if result.when == "call" and result.failed:
+        page = None
+
+        # אם יש fixture page
+        if "page" in item.funcargs:
+            page = item.funcargs["page"]
+        # אם יש page ששמרנו ב-request.cls
+        elif hasattr(item.instance, "page"):
+            page = item.instance.page
+
+        if page:
+            screenshot = page.screenshot()
+            allure.attach(
+                screenshot,
+                name=f"Failure Screenshot - {item.name}",
+                attachment_type=allure.attachment_type.PNG
+            )
+
 
 
