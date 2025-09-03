@@ -20,7 +20,7 @@ class WishListTest(BaseTest):
         with allure.step("login page steps"):
             email = ConfigReader.read_config("account", "email")
             password = ConfigReader.read_config("account", "password")
-            self.login_page.login_right_information(email, password)
+            self.login_page.login(email, password)
 
     @pytest.mark.parametrize("text_apple", [TestData.text_input[3]])
     def test_search_apple(self, text_apple):

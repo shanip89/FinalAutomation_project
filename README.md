@@ -21,12 +21,16 @@ It covers both **positive and negative scenarios**, validates proper behavior an
 ---
 
 ## ⚙️ Installation
-1. Install **PyCharm** or any preferred IDE.  
-2. Install required dependencies from `requirements.txt`:  
+1. Clone the repository  
+   ```bash
+   git clone https://github.com/shanip89/FinalAutomation_project.git
+   ```
+2. Install **PyCharm** or any preferred IDE.  
+3. Install required dependencies from `requirements.txt`:  
    ```bash
    pip install -r requirements.txt
    ```
-3. Install **pytest** and **allure-pytest** plugin inside your environment:
+4. Install **pytest** and **allure-pytest** plugin inside your environment:
    ```bash
    pip install pytest allure-pytest
    ```
@@ -104,8 +108,20 @@ Here’s an example of the automation in action:
 *(Recommended: Add a short **GIF** here. You can create one from your video with tools like [ScreenToGif](https://www.screentogif.com/) or [EZGif](https://ezgif.com/).)*
 
 ```markdown
-![Automation Demo](demo.gif)
+![Automation Demo](gifreadme.gif)
 ```
+## 📊 Reports and Dashboards
+
+- 🔗 [Allure Live Report](#)  
+
+![Allure Summary](allurereport.png)  
+![Allure Packages](packages.png) 
+---
+
+## 📬 Contact
+
+- 👩‍💻 Shani Pitaru  
+- 🌐 [LinkedIn](https://www.linkedin.com/in/shani-pitaru/)  
 
 ---
 

@@ -23,7 +23,7 @@ class TestLogout(BaseTest):  # This is the TEST CLASS
         with allure.step("login page steps"):
             email = ConfigReader.read_config("account", "email")
             password = ConfigReader.read_config("account", "password")
-            self.login_page.login_right_information(email, password)
+            self.login_page.login(email, password)
             # Your test assertions here
             assert self.login_page.get_my_account() == "My Account"
 

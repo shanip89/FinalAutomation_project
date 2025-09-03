@@ -4,6 +4,31 @@ from playwright.sync_api import Page
 
 
 class BasePage:
+    script = f"""
+                    () => {{
+                        document.addEventListener("mousedown", (e) => {{
+                          const ripple = document.createElement("div");
+                          ripple.style.position = "fixed";
+                          ripple.style.left = e.clientX + "px";
+                          ripple.style.top = e.clientY + "px";
+                          ripple.style.width = "30px";
+                          ripple.style.height = "30px";
+                          ripple.style.border = "2px solid red";
+                          ripple.style.borderRadius = "50%";
+                          ripple.style.pointerEvents = "none";
+                          ripple.style.transform = "translate(-50%, -50%) scale(0)";
+                          ripple.style.opacity = "0.8";
+                          ripple.style.transition = "transform 0.2s ease-out, opacity 0.3s ease-out";
+                          document.body.appendChild(ripple);
+                          requestAnimationFrame(() => {{
+                            ripple.style.transform = "translate(-50%, -50%) scale(2.5)";
+                            ripple.style.opacity = "0";
+                          }});
+                          setTimeout(() => ripple.remove(), 700);
+                        }});
+                    }}
+                    """
+
     def __init__(self, page: Page):
         self._page = page
 
@@ -27,59 +52,12 @@ class BasePage:
 
     def click(self, my_locator):
         time.sleep(0.5)
-        script = f"""
-                () => {{
-                    document.addEventListener("mousedown", (e) => {{
-                      const ripple = document.createElement("div");
-                      ripple.style.position = "fixed";
-                      ripple.style.left = e.clientX + "px";
-                      ripple.style.top = e.clientY + "px";
-                      ripple.style.width = "30px";
-                      ripple.style.height = "30px";
-                      ripple.style.border = "2px solid red";
-                      ripple.style.borderRadius = "50%";
-                      ripple.style.pointerEvents = "none";
-                      ripple.style.transform = "translate(-50%, -50%) scale(0)";
-                      ripple.style.opacity = "0.8";
-                      ripple.style.transition = "transform 0.2s ease-out, opacity 0.3s ease-out";
-                      document.body.appendChild(ripple);
-                      requestAnimationFrame(() => {{
-                        ripple.style.transform = "translate(-50%, -50%) scale(2.5)";
-                        ripple.style.opacity = "0";
-                      }});
-                      setTimeout(() => ripple.remove(), 700);
-                    }});
-                }}
-                """
-        self._page.evaluate(script)
+        self._page.evaluate(BasePage.script)
         self._page.locator(my_locator).click()
 
     def click_first(self, my_first_locator):
         time.sleep(1)
-        script = f"""
-                        () => {{
-                            document.addEventListener("mousedown", (e) => {{
-                              const ripple = document.createElement("div");
-                              ripple.style.position = "fixed";
-                              ripple.style.left = e.clientX + "px";
-                              ripple.style.top = e.clientY + "px";
-                              ripple.style.width = "30px";
-                              ripple.style.height = "30px";
-                              ripple.style.border = "2px solid red";
-                              ripple.style.borderRadius = "50%";
-                              ripple.style.pointerEvents = "none";
-                              ripple.style.transform = "translate(-50%, -50%) scale(0)";
-                              ripple.style.opacity = "0.8";
-                              ripple.style.transition = "transform 0.2s ease-out, opacity 0.3s ease-out";
-                              document.body.appendChild(ripple);
-                              requestAnimationFrame(() => {{
-                                ripple.style.transform = "translate(-50%, -50%) scale(2.5)";
-                                ripple.style.opacity = "0";
-                              }});
-                              setTimeout(() => ripple.remove(), 700);
-                            }});
-                        }}
-                        """
+        self._page.evaluate(BasePage.script)
         self._page.locator(my_first_locator).first.click()
 
     def get_text(self, locator_text):
@@ -89,30 +67,7 @@ class BasePage:
         return self._page.locator(locator_all).all_text_contents()
 
     def nav(self, nav_selector, title):
-        script = f"""
-                        () => {{
-                            document.addEventListener("mousedown", (e) => {{
-                              const ripple = document.createElement("div");
-                              ripple.style.position = "fixed";
-                              ripple.style.left = e.clientX + "px";
-                              ripple.style.top = e.clientY + "px";
-                              ripple.style.width = "30px";
-                              ripple.style.height = "30px";
-                              ripple.style.border = "2px solid red";
-                              ripple.style.borderRadius = "50%";
-                              ripple.style.pointerEvents = "none";
-                              ripple.style.transform = "translate(-50%, -50%) scale(0)";
-                              ripple.style.opacity = "0.8";
-                              ripple.style.transition = "transform 0.2s ease-out, opacity 0.3s ease-out";
-                              document.body.appendChild(ripple);
-                              requestAnimationFrame(() => {{
-                                ripple.style.transform = "translate(-50%, -50%) scale(2.5)";
-                                ripple.style.opacity = "0";
-                              }});
-                              setTimeout(() => ripple.remove(), 700);
-                            }});
-                        }}
-                        """
+        self._page.evaluate(BasePage.script)
         self._page.locator(nav_selector).hover()
         nav_list = self._page.locator(f"{nav_selector}  >> li >> a")
         count = nav_list.count()

@@ -15,29 +15,23 @@ from tests.base_test import BaseTest
 @pytest.mark.usefixtures("setup_page_class")
 class TestSearch(BaseTest):
 
-    @pytest.mark.parametrize("text_cellphone", [TestData.text_input[0]])
-    def test_search_cellphone(self, text_cellphone):
-        with allure.step(f"Searching for: {text_cellphone}"):
-            result_products = self.search_page.search_input_no_products(text_cellphone)
-            assert "no product" in result_products
-
-    @pytest.mark.parametrize("text_computer", [TestData.text_input[1]])
-    def test_search_computer(self, text_computer):
-        with allure.step(f"Searching for: {text_computer}"):
-            result_products = self.search_page.search_input_no_products(text_computer)
-            assert "no product" in result_products
-
-    @pytest.mark.parametrize("text_new", [TestData.text_input[2]])
-    def test_search_new(self, text_new):
-        with allure.step(f"Searching for: {text_new}"):
-            result_products = self.search_page.search_input_no_products(text_new)
-            assert "no product" in result_products
-
-    @pytest.mark.parametrize("text_touch", [TestData.text_input[4]])
-    def test_search_touch(self, text_touch):
-        with allure.step(f"Searching for: {text_touch}"):
-            result_products = self.search_page.search_input_get_products(text_touch)
-            for product in result_products:
-                print(product)
-            assert len(result_products) > 0
+    @pytest.mark.parametrize(
+        "search_text, expect_products",
+        [
+            (TestData.text_input[0], False),  # cellphone → no product
+            (TestData.text_input[1], False),  # computer → no product
+            (TestData.text_input[2], False),  # new → no product
+            (TestData.text_input[4], True),  # touch → should return products
+        ]
+    )
+    def test_search_items(self, search_text, expect_products):
+        with allure.step(f"Searching for: {search_text}"):
+            if expect_products:
+                result_products = self.search_page.search_input_get_products(search_text)
+                for product in result_products:
+                    print(product)
+                assert len(result_products) > 0
+            else:
+                result_products = self.search_page.search_input_no_products(search_text)
+                assert "no product" in result_products
 

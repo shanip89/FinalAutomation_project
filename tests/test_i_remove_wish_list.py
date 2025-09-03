@@ -20,7 +20,7 @@ class TestRemoveWishList(BaseTest):
         with allure.step("login page steps"):
             email = ConfigReader.read_config("account", "email")
             password = ConfigReader.read_config("account", "password")
-            self.login_page.login_right_information(email, password)
+            self.login_page.login(email, password)
 
     def test_remove_wish(self):
         with allure.step("Search for the removed product and remove it"):

@@ -11,7 +11,7 @@ class LoginPage(BasePage):
         self._user_info = UserInfoPage(page)
 
     @allure.step("login with email: {email} and password: {password}")
-    def login_right_information(self, email, password):
+    def login(self, email, password):
         self._user_info.account_details(email, password)
 
     def get_my_account(self):

@@ -20,7 +20,7 @@ class TestRemoveFromCart(BaseTest):
         with allure.step("login page steps"):
             email = ConfigReader.read_config("account", "email")
             password = ConfigReader.read_config("account", "password")
-            self.login_page.login_right_information(email, password)
+            self.login_page.login(email, password)
 
     @pytest.mark.parametrize("text_nikon", [TestData.text_input[6]])
     def test_search_nikon(self, text_nikon):

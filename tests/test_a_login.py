@@ -24,7 +24,7 @@ class TestLogin(BaseTest):  # This is the TEST CLASS
         with allure.step("login step with the valid credentials"):
             email = ConfigReader.read_config("account", "email")
             password = ConfigReader.read_config("account", "password")
-            self.login_page.login_right_information(email, password)
+            self.login_page.login(email, password)
             # Your test assertions here
             assert self.login_page.get_my_account() == "My Account"
 
@@ -35,6 +35,6 @@ class TestLogin(BaseTest):  # This is the TEST CLASS
     def test_user_wrong_info(self, password):
         with allure.step("login with incorrect password"):
             email = ConfigReader.read_config("account", "email")
-            self.login_page.login_right_information(email, password)
+            self.login_page.login(email, password)
             assert self.login_page.get_error_msg()
 

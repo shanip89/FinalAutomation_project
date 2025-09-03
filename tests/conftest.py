@@ -1,6 +1,7 @@
+from idlelib import browser
 
 import pytest
-from playwright.sync_api import Page
+from playwright.sync_api import Page, sync_playwright
 
 from pages.add_cart_page import AddCartPage
 from pages.calculate_page import CalcPage
@@ -46,6 +47,8 @@ def setup_page_class(request, browser):
     request.cls.form_page = FormPage(page)
     request.cls.address_page = AddressPage(page)
     request.cls.logout_page = LogoutPage(page)
+    yield
+    page.close()
 
 
 @pytest.fixture(scope="function")
@@ -67,6 +70,8 @@ def fresh_function(request, page: Page):
     request.cls.form_page = FormPage(page)
     request.cls.address_page = AddressPage(page)
     request.cls.logout_page = LogoutPage(page)
+    yield
+    page.close()
 
 
 @pytest.hookimpl(hookwrapper=True)
@@ -91,6 +96,3 @@ def pytest_runtest_makereport(item, call):
                 name=f"Failure Screenshot - {item.name}",
                 attachment_type=allure.attachment_type.PNG
             )
-
-
-

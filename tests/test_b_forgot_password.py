@@ -16,6 +16,7 @@ from utils.config_reader import ConfigReader
 @pytest.mark.usefixtures("setup_page_class")
 class TestForgotPassword(BaseTest):
 
+    @allure.title("Forgot password test")
     @pytest.mark.run(order=3)
     def test_forgot_password(self):
         email = ConfigReader.read_config("account", "email")
