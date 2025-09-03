@@ -107,9 +107,9 @@ Here’s an example of the automation in action:
 
 *(Recommended: Add a short **GIF** here. You can create one from your video with tools like [ScreenToGif](https://www.screentogif.com/) or [EZGif](https://ezgif.com/).)*
 
-```markdown
+
 ![Automation Demo](gifreadme.gif)
-```
+
 ## 📊 Reports and Dashboards
 
 - 🔗 [Allure Live Report](#)  
