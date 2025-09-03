@@ -69,10 +69,10 @@ allure serve allure-results
 ## 📂 Project Structure
 ```
 Final/
+├── data/               # Test data
 ├── pages/              # All page classes using POM
 ├── tests/              # All test cases
 ├── utils/              # Utility functions
-├── data/               # Test data
 ├── allure/             # Allure reports
 ├── config.ini          # Configs (like login credentials)
 ├── pytest.ini          # Pytest configs
@@ -83,11 +83,11 @@ Final/
 ---
 
 ## ✨ Features
-- ✅ Page Object Model (POM) implementation  
-- ✅ Positive & Negative test coverage  
-- ✅ Allure detailed test reports with steps & screenshots  
-- ✅ GitHub Actions integration for CI/CD  
-- ✅ Easy to extend and maintain  
+ ✅ Page Object Model (POM) implementation  
+ ✅ Positive & Negative test coverage  
+ ✅ Allure detailed test reports with steps & screenshots  
+ ✅ GitHub Actions integration for CI/CD  
+ ✅ Easy to extend and maintain  
 
 ---
 
@@ -112,7 +112,3 @@ Here’s an example of the automation in action:
 ## 👩‍💻 Author
 Created by **Shani Pitaru**
 
----
-
-## 📜 License
-This project is open source under the **MIT License**.
