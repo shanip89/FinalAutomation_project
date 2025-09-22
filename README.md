@@ -1,3 +1,15 @@
+## 🎥 Demo
+Here’s an example of the automation in action:  
+
+*(Recommended: Add a short **GIF** here. You can create one from your video with tools like [ScreenToGif](https://www.screentogif.com/) or [EZGif](https://ezgif.com/).)*
+
+
+![Automation Demo](gifreadme.gif)
+
+
+---
+
+
 # 🛒 My Final Project Automation - Shani Pitaru
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue)
@@ -102,14 +114,6 @@ This project uses **GitHub Actions** to automatically:
 
 ---
 
-## 🎥 Demo
-Here’s an example of the automation in action:  
-
-*(Recommended: Add a short **GIF** here. You can create one from your video with tools like [ScreenToGif](https://www.screentogif.com/) or [EZGif](https://ezgif.com/).)*
-
-
-![Automation Demo](gifreadme.gif)
-
 ## 📊 Reports and Dashboards
 
 - 🔗 [Allure Live Report](#)  
@@ -122,6 +126,11 @@ Here’s an example of the automation in action:
 
 - 👩‍💻 Shani Pitaru  
 - 🌐 [LinkedIn](https://www.linkedin.com/in/shani-pitaru/)  
+
+---
+
+The project was created as part of an automation course under the Automation College (Gal Matalon):  
+[https://automation.co.il/](https://automation.co.il/)
 
 ---
 
